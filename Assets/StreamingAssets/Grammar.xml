@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<grammar xml:lang="en" root="root"
+tag-format="semantics/1.0" version="1.0"
+xmlns="http://www.w3.org/2001/06/grammar">
+
+	<rule id="root">
+		<one-of>
+			<item>
+				<ruleref uri="#move"/>
+				<tag>out.action=rules.latest();</tag>
+			</item>
+			<item>
+				<ruleref uri="#play"/>
+			</item>
+			<item>
+				<ruleref uri="#quit"/>
+			</item>
+			<item>
+				<ruleref uri="#pause"/>
+			</item>
+		</one-of>
+	</rule>
+
+	<rule id="play">
+		<one-of>
+			<item>
+				<tag>out.menu="play"</tag>
+				<one-of>
+					<item>
+						play
+					</item>
+					<item>
+						start
+					</item>
+					<item>
+						continue
+					</item>
+					<item>
+						resume
+					</item>
+				</one-of>
+			</item>
+		</one-of>
+	</rule>
+
+	<rule id="quit">
+		<one-of>
+			<item>
+				<tag>out.menu="quit"</tag>
+				<one-of>
+					<item>
+						quit
+					</item>
+					<item>
+						exit
+					</item>
+					<item>
+						return
+					</item>
+					<item>
+						main menu
+					</item>
+				</one-of>
+			</item>
+		</one-of>
+	</rule>
+
+	<rule id="pause">
+		<one-of>
+			<item>
+				<tag>out.menu="pause"</tag>
+				<one-of>
+					<item>
+						pause
+					</item>
+				</one-of>
+			</item>
+		</one-of>
+	</rule>
+
+
+
+	<rule id="move">
+		<one-of>
+			<item>
+				<item>
+					move<tag>out.action="move"</tag>
+				</item>
+				<ruleref uri="#direction"/>
+				<tag>out.direction=rules.latest();</tag>
+			</item>
+			<item>
+				<item>
+					stop<tag>out.action="move"</tag>
+				</item>
+				<tag>out.direction="stop"</tag>
+			</item>
+			<item>
+				<item>
+					jump<tag>out.action="move"</tag>
+				</item>
+				<tag>out.direction="jump"</tag>
+			</item>
+		</one-of>
+	</rule>
+
+	<rule id="direction">
+		<one-of>
+			<item>
+				left<tag>out="left"</tag>
+			</item>
+			<item>
+				right<tag>out="right"</tag>
+			</item>
+		</one-of>
+	</rule>
+</grammar>
